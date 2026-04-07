@@ -1,0 +1,120 @@
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+
+#Dataset folder
+data/raw
+
+# Virtual environments (e.g., .venv for Poetry)
+.venv/
+env/
+ENV/
+venv/
+pip-wheel-metadata/
+poetry.lock.bak
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# PyCharm
+.idea/
+
+# VS Code
+.vscode/
+.code-workspace
+
+# mypy / pylint / type checkers
+.mypy_cache/
+.dmypy.json
+.pyre/
+.pytype/
+pylint-report.txt
+
+# DVC cache and config
+.dvc/
+.dvc/tmp/
+.dvc/cache/
+
+# Logs and tracking artifacts
+*.log
+logs/
+wandb/
+mlruns/
+runs/
+
+# HuggingFace cache and datasets
+.cache/
+transformers_cache/
+datasets/
+hf_cache/
+~/.cache/huggingface/
+*.h5
+
+# Model files
+*.pt
+*.bin
+*.pkl
+*.pth
+
+# Intermediate and processed data
+data/interim/
+data/processed/
+
+# Reports
+*.pdf
+reports/figures/*.png
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Local environment and secret files
+.env
+.env.*
+
+# Coverage reports
+*.lcov
+
+# Allow folder structure preservation with .gitkeep
+!*/.gitkeep
+/data/raw/multilabel_resume.csv
