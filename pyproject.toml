@@ -27,3 +27,8 @@ explicit = true
 
 [tool.setuptools.packages.find]
 include = ["src*"]
+
+[dependency-groups]
+dev = [
+    "pandas-stubs>=3.0.0.260204",
+]
