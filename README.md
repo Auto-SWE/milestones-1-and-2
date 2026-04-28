@@ -1,4 +1,4 @@
-# cpp-vulnerability-detection
+# Milestone 1 & 2
 
 ## Run
 
