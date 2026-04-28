@@ -13,7 +13,7 @@ dependencies = [
 ]
 
 [project.scripts]
-process-embeddings = "src.main:main"
+process-embeddings = "src.commands.process_embeddings:main"
 
 [tool.uv.sources]
 torch = [

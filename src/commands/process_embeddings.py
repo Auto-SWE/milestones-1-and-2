@@ -7,7 +7,7 @@ from pandas import DataFrame
 from src.embeddings.embedder import CodeBERTEmbedder
 from src.utils.parser import extract_features, load_jsonl
 
-PROJECT_ROOT: Final[Path] = Path(__file__).resolve().parents[1]
+PROJECT_ROOT: Final[Path] = Path(__file__).resolve().parents[2]
 DATA_DIR: Final[Path] = PROJECT_ROOT / "data" / "samples"
 OUT_DIR: Final[Path] = PROJECT_ROOT / "data" / "processed" / "embeddings"
 
@@ -39,7 +39,3 @@ def main() -> None:
 
     for split, file in FILES.items():
         process_split(split, file, embedder)
-
-
-if __name__ == "__main__":
-    main()
