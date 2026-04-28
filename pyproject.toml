@@ -15,6 +15,7 @@ dependencies = [
 
 [project.scripts]
 process-embeddings = "src.commands.process_embeddings:main"
+download-dataset = "src.commands.download_dataset:main"
 
 [tool.uv.sources]
 torch = [
