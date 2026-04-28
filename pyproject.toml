@@ -13,7 +13,7 @@ dependencies = [
 ]
 
 [project.scripts]
-cpp-vulnerability-detection = "src.main:main"
+process-embeddings = "src.main:main"
 
 [tool.uv.sources]
 torch = [

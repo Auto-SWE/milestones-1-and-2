@@ -5,11 +5,11 @@
 ```bash
 nix develop
 uv sync
-uv run cpp-vulnerability-detection
+uv run process-embeddings
 ```
 
 Or as a one-shot command:
 
 ```bash
-nix develop -c uv run cpp-vulnerability-detection
+nix develop -c uv run process-embeddings
 ```
