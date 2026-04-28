@@ -5,11 +5,6 @@
 ```bash
 nix develop
 uv sync
+uv run download-dataset
 uv run process-embeddings
-```
-
-Or as a one-shot command:
-
-```bash
-nix develop -c uv run process-embeddings
 ```
