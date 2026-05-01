@@ -38,7 +38,11 @@ def process_split(split: str, path: Path, output_dir: Path, embedder: Any) -> No
 
     print(f"Processing {split}... ({len(code)} samples)")
 
-    embeddings: torch.Tensor = embedder.embed(code)
+    embeddings: torch.Tensor = embedder.embed(
+        code,
+        show_progress=True,
+        progress_desc=f"Embedding {split}",
+    )
 
     torch.save(embeddings, output_dir / f"{split}_embeddings.pt")
     torch.save(torch.tensor(labels), output_dir / f"{split}_labels.pt")
