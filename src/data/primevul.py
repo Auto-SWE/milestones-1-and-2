@@ -2,11 +2,13 @@ import shutil
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Final
+from urllib.request import urlopen
 
-import gdown
-
-PRIMEVUL_V01_URL: Final[str] = (
-    "https://drive.google.com/drive/folders/1cznxGme5o6A_9tT8T47JUh3MPEpRYiKK"
+PRIMEVUL_DATASET_URL: Final[str] = (
+    "https://huggingface.co/datasets/colin/PrimeVul"
+)
+HUGGING_FACE_DATASET_BASE_URL: Final[str] = (
+    "https://huggingface.co/datasets/colin/PrimeVul/resolve/main"
 )
 EXPECTED_SPLIT_FILES: Final[dict[str, str]] = {
     "train": "primevul_train.jsonl",
@@ -29,6 +31,20 @@ def find_split_files(root: Path) -> dict[str, Path]:
     return found
 
 
+def download_primevul_from_hugging_face(target_dir: Path) -> dict[str, Path]:
+    target_dir.mkdir(parents=True, exist_ok=True)
+
+    for filename in EXPECTED_SPLIT_FILES.values():
+        file_url = f"{HUGGING_FACE_DATASET_BASE_URL}/{filename}"
+        output_path = target_dir / filename
+
+        print(f"Downloading {filename} from Hugging Face...")
+        with urlopen(file_url) as response, output_path.open("wb") as output_file:
+            shutil.copyfileobj(response, output_file)
+
+    return find_split_files(target_dir)
+
+
 def download_primevul(target_dir: Path, force: bool = False) -> dict[str, Path]:
     if target_dir.exists():
         if any(target_dir.iterdir()) and not force:
@@ -44,19 +60,8 @@ def download_primevul(target_dir: Path, force: bool = False) -> dict[str, Path]:
     with TemporaryDirectory(dir=target_dir.parent) as temp_dir_name:
         temp_dir = Path(temp_dir_name)
         download_root = temp_dir / "primevul"
-        download_root.mkdir(parents=True, exist_ok=True)
+        split_files = download_primevul_from_hugging_face(download_root)
 
-        result = gdown.download_folder(
-            url=PRIMEVUL_V01_URL,
-            output=str(download_root),
-            quiet=False,
-            resume=True,
-        )
-
-        if not result:
-            raise RuntimeError("PrimeVul download returned no files.")
-
-        split_files = find_split_files(download_root)
         shutil.move(str(download_root), str(target_dir))
 
     return find_split_files(target_dir)
