@@ -13,7 +13,9 @@ dependencies = [
 ]
 
 [project.scripts]
-cpp-vulnerability-detection = "src.main:main"
+process-embeddings = "src.commands.process_embeddings:main"
+download-dataset = "src.commands.download_dataset:main"
+read-tensor = "src.commands.read_tensor:main"
 
 [tool.uv.sources]
 torch = [
