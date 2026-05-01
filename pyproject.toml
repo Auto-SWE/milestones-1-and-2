@@ -8,7 +8,7 @@ version = "0.1.0"
 requires-python = ">=3.13"
 dependencies = [
     "pandas~=3.0.2",
-    "torch~=2.11.0",
+    "torch>=2.11.0",
     "transformers~=5.5.0",
 ]
 
@@ -16,11 +16,6 @@ dependencies = [
 process-embeddings = "src.commands.process_embeddings:main"
 download-dataset = "src.commands.download_dataset:main"
 read-tensor = "src.commands.read_tensor:main"
-
-[tool.uv.sources]
-torch = [
-    { index = "pytorch-cpu", marker = "sys_platform == 'linux'" },
-]
 
 [[tool.uv.index]]
 name = "pytorch-cpu"
