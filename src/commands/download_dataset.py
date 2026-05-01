@@ -2,7 +2,7 @@ import argparse
 from pathlib import Path
 from typing import Final
 
-from src.data.primevul import PRIMEVUL_V01_URL, download_primevul
+from src.data.primevul import PRIMEVUL_DATASET_URL, download_primevul
 
 PROJECT_ROOT: Final[Path] = Path(__file__).resolve().parents[2]
 DEFAULT_OUTPUT_DIR: Final[Path] = PROJECT_ROOT / "data" / "raw" / "primevul"
@@ -30,7 +30,7 @@ def main() -> None:
     args = parse_args()
     target_dir = args.output_dir.resolve()
 
-    print(f"Downloading PrimeVul v0.1 from {PRIMEVUL_V01_URL}")
+    print(f"Downloading PrimeVul v0.1 from {PRIMEVUL_DATASET_URL}")
     print(f"Target directory: {target_dir}")
 
     split_files = download_primevul(target_dir=target_dir, force=args.force)
