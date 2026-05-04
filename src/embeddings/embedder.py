@@ -18,8 +18,8 @@ class CodeBERTEmbedder:
     def embed(
         self,
         code_list,
-        max_length=256,
-        batch_size=32,
+        max_length=512,
+        batch_size=16,
         show_progress=False,
         progress_desc="Embedding",
     ):
@@ -47,8 +47,10 @@ class CodeBERTEmbedder:
                 inputs = {k: v.to(self.device) for k, v in inputs.items()}
                 outputs = self.model(**inputs)
 
-                # CLS token embedding
-                batch_embeds = outputs.last_hidden_state[:, 0, :]
+                attention_mask = inputs["attention_mask"].unsqueeze(-1)
+                masked_hidden_state = outputs.last_hidden_state * attention_mask
+                token_counts = attention_mask.sum(dim=1).clamp(min=1)
+                batch_embeds = masked_hidden_state.sum(dim=1) / token_counts
                 embeddings.append(batch_embeds.cpu())
 
         return torch.cat(embeddings, dim=0)

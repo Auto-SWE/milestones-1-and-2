@@ -17,6 +17,7 @@ dependencies = [
 process-embeddings = "src.commands.process_embeddings:main"
 download-dataset = "src.commands.download_dataset:main"
 read-tensor = "src.commands.read_tensor:main"
+train-lr = "src.commands.train_logistic_regression:main"
 
 [[tool.uv.index]]
 name = "pytorch-cpu"
