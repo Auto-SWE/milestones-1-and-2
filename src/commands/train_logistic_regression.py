@@ -2,7 +2,7 @@ import argparse
 from pathlib import Path
 from typing import Final
 
-from src.ml.logistic_regression import train_and_evaluate
+from src.ml.logistic_regression import DEFAULT_C, DEFAULT_MAX_ITER, train_and_evaluate
 
 PROJECT_ROOT: Final[Path] = Path(__file__).resolve().parents[2]
 DEFAULT_EMBEDDING_DIR: Final[Path] = PROJECT_ROOT / "data" / "processed" / "embeddings"
@@ -21,8 +21,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--max-iter",
         type=int,
-        default=1000,
+        default=DEFAULT_MAX_ITER,
         help="Maximum iterations for logistic regression.",
+    )
+    parser.add_argument(
+        "--c",
+        type=float,
+        default=DEFAULT_C,
+        help="Inverse regularization strength for logistic regression.",
     )
     return parser.parse_args()
 
@@ -33,4 +39,5 @@ def main() -> None:
     train_and_evaluate(
         embedding_dir=args.embedding_dir.resolve(),
         max_iter=args.max_iter,
+        c=args.c,
     )
