@@ -30,6 +30,7 @@ def load_split(split: Split, embedding_dir: Path):
 def find_best_threshold(y_true, positive_scores) -> tuple[float, float]:
     order = np.argsort(positive_scores)[::-1]
     sorted_y = y_true[order]
+    sorted_scores = positive_scores[order]
 
     true_positives = np.cumsum(sorted_y == 1)
     false_positives = np.cumsum(sorted_y == 0)
@@ -43,9 +44,12 @@ def find_best_threshold(y_true, positive_scores) -> tuple[float, float]:
         out=np.zeros_like(true_positives, dtype=float),
         where=denominator != 0,
     )
-    best_index = int(np.argmax(f1_scores))
+    threshold_indices = np.flatnonzero(
+        np.r_[sorted_scores[1:] != sorted_scores[:-1], True]
+    )
+    best_index = int(threshold_indices[np.argmax(f1_scores[threshold_indices])])
 
-    return float(positive_scores[order[best_index]]), float(f1_scores[best_index])
+    return float(sorted_scores[best_index]), float(f1_scores[best_index])
 
 
 def evaluate(
