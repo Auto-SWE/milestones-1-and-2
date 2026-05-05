@@ -11,5 +11,6 @@ uv sync
 uv run download-dataset
 uv run process-embeddings
 uv run train-lr
+uv run train-svm
 uv run read-tensor --train -n 3
 ```
