@@ -26,7 +26,7 @@ def load_split(split: Split, embedding_dir: Path):
 
     return x.numpy(), y.numpy()
 
-
+# This method was implemented with the help of AI
 def find_best_threshold(y_true, positive_scores) -> tuple[float, float]:
     order = np.argsort(positive_scores)[::-1]
     sorted_y = y_true[order]
